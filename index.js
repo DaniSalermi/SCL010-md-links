@@ -1,10 +1,10 @@
 const mdLinks = require("./md-links");
-mdLinks("./README.md")
+console.time("Con validate");
+mdLinks("./README.md", { validate: true })
   .then(res => {
     console.log(res);
+    console.timeEnd("Con validate");
   })
   .catch(err => {
     console.log(err);
   });
-
-console.log("Última línea del archivo");
