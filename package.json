@@ -19,7 +19,9 @@
     "markdown",
     "mdlinks",
     "links",
-    "md"
+    "md",
+    "nodejs",
+    "markdownlinks"
   ],
   "author": "Daniela Salermi",
   "license": "ISC",
@@ -31,6 +33,7 @@
     "@babel/core": "^7.5.5",
     "eslint": "^6.2.1",
     "eslint-plugin-jest": "^22.15.2",
+    "fetch": "^1.1.0",
     "jest": "^24.9.0"
   }
 }
