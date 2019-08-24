@@ -1,5 +1,7 @@
 # Markdown Links
 
+[![npm Version](https://img.shields.io/badge/npm-v1.0.1-blue)](https://www.npmjs.com/package/@danisalermi/md-links)
+
 ## Preámbulo
 
 [Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado
@@ -110,7 +112,7 @@ siguiente interfaz:
   relativa, debe resolverse como relativa al directorio desde donde se invoca
   node - _current working directory_).
 - `options`: Un objeto con las siguientes propiedades:
-  * `validate`: Booleano que determina si se desea validar los links
+  - `validate`: Booleano que determina si se desea validar los links
     encontrados.
 
 ##### Valor de retorno
@@ -212,10 +214,11 @@ Broken: 1
 ```
 
 ## Entregables
+
 - Pseudo codigo o diagrama de flujo con el algoritmo que soluciona el problema.
 - Módulo instalable via `npm install <github-user>/md-links`. Este módulo debe
-incluir tanto un ejecutable como una interfaz que podamos importar con `require`
-para usarlo programáticamente.
+  incluir tanto un ejecutable como una interfaz que podamos importar con `require`
+  para usarlo programáticamente.
 
 ## Hacker edition
 
@@ -229,7 +232,8 @@ para usarlo programáticamente.
 Te aconsejamos revisar [la rúbrica](https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vRktPN4ilZtkRN5tUb3DVhgeihwlzk63_-JI3moA-bXpKDbHDioAK2H3qbrwWNb0Ql4wX22Tgv7-PDv/pubhtml)
 para ver la descripción detallada de cada _habilidad_ y cada _nivel_. Esta es
 una lista de todas las habilidades involucradas en este proyecto y que
-evaluaremos cuando lo  completes:
+evaluaremos cuando lo completes:
+
 ### General
 
 | Característica
@@ -269,7 +273,7 @@ habilidades blandas. Te aconsejamos revisar la rúbrica:
 | Nomenclatura/semántica
 | Funciones/modularidad
 | Estructuras de datos
-| Tests 
+| Tests
 
 ## Pistas / Tips
 
@@ -287,8 +291,7 @@ desde GitHub. Ver [docs oficiales de `npm install` acá](https://docs.npmjs.com/
 
 Por ejemplo, el [`course-parser`](https://github.com/Laboratoria/course-parser)
 que usamos para la currícula no está publicado en el registro público de NPM,
-así que lo instalamos directamente desde GitHub con el comando `npm install
-Laboratoria/course-parser`.
+así que lo instalamos directamente desde GitHub con el comando `npm install Laboratoria/course-parser`.
 
 ### Sugerencias de implementación
 
@@ -374,5 +377,5 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 ### Pruebas / tests
 
 - [ ] Pruebas unitarias cubren un mínimo del 70% de statements, functions,
-  lines, y branches.
+      lines, y branches.
 - [ ] Pasa tests (y linters) (`npm test`).
