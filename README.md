@@ -1,6 +1,6 @@
 # Markdown Links
 
-[![npm Version](https://img.shields.io/badge/npm-v1.0.1-blue)](https://www.npmjs.com/package/@danisalermi/md-links)
+[![npm](https://img.shields.io/npm/v/@danisalermi/md-links)](https://www.npmjs.com/package/@danisalermi/md-links)
 
 ## Preámbulo
 
