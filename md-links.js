@@ -1,8 +1,13 @@
+#!/usr/bin/env node
+
 const fs = require("fs");
 const readline = require("readline");
 const FileHound = require("filehound");
 const fetchUrl = require("fetch").fetchUrl;
 const process = require("process");
+const commander = require("commander");
+const program = new commander.Command();
+program.version("1.0.1").description("Stadistics about markdown files");
 
 const ext = [
   "markdown",
@@ -16,6 +21,27 @@ const ext = [
   "text",
   "Rmd"
 ];
+
+program.parse(process.argv);
+function getFileFromDirectory(directory) {
+  const files = FileHound.create()
+    .paths(directory)
+    .ext(ext)
+    .depth(0)
+    .find();
+  files
+    .then(res => {
+      res.forEach(markDownDocument => {
+        processLineByLine(markDownDocument, { validate: false }).then(links => {
+          links.forEach(link => {
+            console.log(`${link.file} ${link.href} ${link.text}`);
+          });
+        });
+      });
+      return console.log(res);
+    })
+    .catch(err => console.log(err));
+}
 
 function getUrlFromLine(line) {
   let url = line.split("(h")[1];
@@ -38,7 +64,6 @@ function validate(link) {
   return new Promise((resolve, reject) => {
     let status;
     fetchUrl(link, function(error, meta, body) {
-      console.log("El estado del sitio es: ", meta.status);
       status = meta.status;
       resolve(status);
     });
@@ -87,3 +112,9 @@ module.exports = (path, options = { validate: false }) => {
     }
   });
 };
+
+const cliEjecution = () => {
+  getFileFromDirectory(program.args[0]);
+};
+
+cliEjecution();

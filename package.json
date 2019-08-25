@@ -6,6 +6,10 @@
   "directories": {
     "test": "test"
   },
+  "preferGlobal": true,
+  "bin": {
+    "md-links": "./md-links.js"
+  },
   "scripts": {
     "test": "jest --coverage",
     "eslint": "eslint --ext .js src/test",
@@ -31,6 +35,7 @@
   "homepage": "https://github.com/DaniSalermi/SCL010-md-links#readme",
   "dependencies": {
     "@babel/core": "^7.5.5",
+    "commander": "^3.0.0",
     "eslint": "^6.2.1",
     "eslint-plugin-jest": "^22.15.2",
     "fetch": "^1.1.0",

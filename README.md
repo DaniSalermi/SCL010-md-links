@@ -1,6 +1,7 @@
 # Markdown Links
 
 [![npm](https://img.shields.io/npm/v/@danisalermi/md-links)](https://www.npmjs.com/package/@danisalermi/md-links)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/DaniSalermi/SCL010-md-links)
 
 ## Preámbulo
 
