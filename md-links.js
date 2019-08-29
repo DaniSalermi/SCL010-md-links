@@ -3,8 +3,10 @@
 const fs = require("fs");
 const readline = require("readline");
 const FileHound = require("filehound");
-const fetchUrl = require("fetch").fetchUrl;
+const fetch = require("fetch");
+const fetchUrl = fetch.fetchUrl;
 const commander = require("commander");
+const path = require("path");
 
 // ! Fin dependencias necesarias del paquete
 
@@ -26,6 +28,17 @@ const ext = [
 //Función que valida si es un directorio o un archivo md
 function checkMdFilesOrDirectory(path) {
   return ext.indexOf(path.split(".").pop());
+}
+
+//Función para retornar un directorio absoluto cuando una persona pasa un directorio relativo
+function absoluteRoute(route) {
+  if (path.isAbsolute(route)) {
+    return route;
+  } else {
+    route = path.normalize(route);
+    route = path.resolve(route);
+    return route;
+  }
 }
 
 //Función validate, cuando se ejecuta, devuelve el status para cada link encontrado.
@@ -77,7 +90,7 @@ function getUrlFromLine(line) {
   return url;
 }
 
-//Esta función lee línea a líne un archivo markdown y devuelve un arreglo de objetos
+//Esta función lee línea a línea un archivo markdown y devuelve un arreglo de objetos
 async function processLineByLine(path, options) {
   const fileStream = fs.createReadStream(path);
   const rl = readline.createInterface({
@@ -92,6 +105,7 @@ async function processLineByLine(path, options) {
     let linkInformation = {};
     if (line.includes("(http") && line.includes(")")) {
       let url = getUrlFromLine(line);
+
       //Se arma el objeto con la información de cada URL
       linkInformation = {
         href: url,
@@ -103,7 +117,6 @@ async function processLineByLine(path, options) {
         linkInformation.status = await validate(url);
         linkInformation.ok = linkInformation.status > 399 ? "fail" : "ok";
       }
-
       numberOfLinks++;
       links.push(linkInformation);
     }
@@ -124,7 +137,7 @@ async function processLineByLine(path, options) {
 }
 
 function getFileFromDirectory(directory, options) {
-  console.log(directory);
+  // console.log(directory);
   const files = FileHound.create()
     .paths(directory)
     .ext(ext)
@@ -135,7 +148,7 @@ function getFileFromDirectory(directory, options) {
       res.forEach(markDownDocument => {
         processLineByLine(markDownDocument, { validate: false }).then(links => {
           links.forEach(link => {
-            console.log(`${link.file} ${link.href} ${link.text}`);
+            console.log(`${link.file}    ${link.href}    ${link.text}`);
           });
         });
       });
@@ -152,9 +165,12 @@ module.exports = (path, options = { validate: false, stats: false }) => {
     console.log(path);
     const isMd = checkMdFilesOrDirectory(path);
     if (isMd >= 0) {
-      resolve(processLineByLine(path, options));
+      let userPath;
+      userPath = absoluteRoute(path);
+      resolve(processLineByLine(userPath, options));
     } else {
-      resolve(getFileFromDirectory(path, options));
+      userPath = absoluteRoute(path);
+      resolve(getFileFromDirectory(userPath, options));
       //reject("No hay archivos de tipo markdown");
     }
   });
@@ -167,24 +183,36 @@ module.exports = (path, options = { validate: false, stats: false }) => {
 const program = new commander.Command();
 program.version("1.0.1").description("Stadistics about markdown files");
 
-//Definiendo opciones válidas que podrá ingresar el usuario
+// Definiendo opciones válidas que podrá ingresar el usuario
 program
   .option("-v, --validate", "to validate the links inside of a markdown file")
   .option(
     "-s, --stats",
     "to show some basic stats about the links (total of links and unique ones"
   );
+// Fin de las opciones validas para nuestro paquete
 
 program.parse(process.argv);
-
 console.log(program.args);
+
+function selectedOption() {
+  let option = {};
+  option.validate = program.validate;
+  option.stats = program.stats;
+  console.log(option);
+  return option;
+}
 
 const cliEjecution = () => {
   const isMd = checkMdFilesOrDirectory(program.args[0]);
+  option = selectedOption();
   if (isMd >= 0) {
-    processLineByLine(program.args[0]);
+    let userPath;
+    userPath = absoluteRoute(program.args[0]);
+    processLineByLine(userPath, selectedOption());
   } else {
-    getFileFromDirectory(program.args[0]);
+    userPath = absoluteRoute(program.args[0]);
+    getFileFromDirectory(userPath, selectedOption());
   }
 
   if (program.validate) {
