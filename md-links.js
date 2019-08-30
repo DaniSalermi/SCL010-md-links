@@ -33,10 +33,12 @@ function checkMdFilesOrDirectory(path) {
 //Función para retornar un directorio absoluto cuando una persona pasa un directorio relativo
 function absoluteRoute(route) {
   if (path.isAbsolute(route)) {
+    console.log(route);
     return route;
   } else {
     route = path.normalize(route);
     route = path.resolve(route);
+    console.log(route);
     return route;
   }
 }
@@ -136,8 +138,8 @@ async function processLineByLine(path, options) {
   }
 }
 
-function getFileFromDirectory(directory, options) {
-  // console.log(directory);
+function getFileFromDirectory(directory) {
+  //console.log(directory);
   const files = FileHound.create()
     .paths(directory)
     .ext(ext)
@@ -209,9 +211,10 @@ const cliEjecution = () => {
   if (isMd >= 0) {
     let userPath;
     userPath = absoluteRoute(program.args[0]);
-    processLineByLine(userPath, selectedOption());
+    processLineByLine(userPath, selectedOption()).then(printInTerminal);
   } else {
     userPath = absoluteRoute(program.args[0]);
+    console.log("1" + userPath);
     getFileFromDirectory(userPath, selectedOption());
   }
 
@@ -223,4 +226,17 @@ if (program.args.length > 0) {
   cliEjecution();
 }
 
+function printInTerminal(response) {
+  if (program.stats) {
+    console.log(response);
+  } else {
+    response.forEach(link => {
+      console.log(
+        `${link.file} ${link.href} ${
+          program.validate ? link.ok + " " + link.status : ""
+        } ${link.text} `
+      );
+    });
+  }
+}
 // ! Fin funciones terminal (CLI)
