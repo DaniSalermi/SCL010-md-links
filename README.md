@@ -3,6 +3,10 @@
 [![npm](https://img.shields.io/npm/v/@danisalermi/md-links)](https://www.npmjs.com/package/@danisalermi/md-links)
 [![GitHub release - latest by date](https://img.shields.io/github/v/release/DaniSalermi/SCL010-md-links)](https://github.com/DaniSalermi/SCL010-md-links/releases)
 
+Encuentra todos los links dentro de un archivo Markdown. Funciona cuando se ingresa una ruta relativa/ absoluta o si se llama un archivo Markdown que se encuentre en la posiciòn relativa en la que està el usuario.
+
+## Instalación
+
 ## Preámbulo
 
 [Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado

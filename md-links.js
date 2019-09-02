@@ -7,7 +7,7 @@ const fetch = require("fetch");
 const fetchUrl = fetch.fetchUrl;
 const commander = require("commander");
 const path = require("path");
-
+const chalk = require("chalk");
 // ! Fin dependencias necesarias del paquete
 
 // Variable que contiene un arreglo con todos los tipos de archivos Markdown.
@@ -33,12 +33,10 @@ function checkMdFilesOrDirectory(path) {
 //Función para retornar un directorio absoluto cuando una persona pasa un directorio relativo
 function absoluteRoute(route) {
   if (path.isAbsolute(route)) {
-    console.log(route);
     return route;
   } else {
     route = path.normalize(route);
     route = path.resolve(route);
-    console.log(route);
     return route;
   }
 }
@@ -127,10 +125,10 @@ async function processLineByLine(path, options) {
   console.log(`Hay un total de: ${numberOfLinks} links`);
   if (options.stats) {
     let salida = "";
-    salida += `Total: ${numberOfLinks} \n`;
-    salida += `Unique: ${uniqueLinks(links)} \n`;
+    salida += chalk.cyan(`Total: ${numberOfLinks} \n`);
+    salida += chalk.green(`Unique: ${uniqueLinks(links)} \n`);
     if (options.validate) {
-      salida += `Broken: ${brokenLinks(links)} \n`;
+      salida += chalk.red(`Broken: ${brokenLinks(links)} \n`);
     }
     return salida;
   } else {
@@ -139,41 +137,53 @@ async function processLineByLine(path, options) {
 }
 
 function getFileFromDirectory(directory) {
-  //console.log(directory);
-  const files = FileHound.create()
+  return FileHound.create()
     .paths(directory)
     .ext(ext)
     .depth(0)
     .find();
-  files
-    .then(res => {
-      res.forEach(markDownDocument => {
-        processLineByLine(markDownDocument, { validate: false }).then(links => {
-          links.forEach(link => {
-            console.log(`${link.file}    ${link.href}    ${link.text}`);
-          });
-        });
-      });
-      return console.log(res);
-    })
-    .catch(err => console.log(err));
 }
 
 // ! Fin funciones compartidas
 
 // ! Módulo del require
+
+function getLinksWhenIsDirectory(arrayOfFiles, options) {
+  return new Promise((resolve, reject) => {
+    let arrayOfPromises = [];
+    for (let i = 0; i < arrayOfFiles.length; i++) {
+      arrayOfPromises.push(processLineByLine(arrayOfFiles[i], options));
+    }
+    return Promise.all(arrayOfPromises).then(listArrayMdLinks => {
+      let output = [];
+      listArrayMdLinks.forEach(listLinks => {
+        if (options.stats) {
+          output.push(listLinks);
+        } else {
+          listLinks.forEach(link => output.push(link));
+        }
+      });
+      resolve(output);
+    });
+  });
+}
+
 module.exports = (path, options = { validate: false, stats: false }) => {
   return new Promise((resolve, reject) => {
-    console.log(path);
     const isMd = checkMdFilesOrDirectory(path);
     if (isMd >= 0) {
-      let userPath;
-      userPath = absoluteRoute(path);
+      let userPath = absoluteRoute(path);
       resolve(processLineByLine(userPath, options));
     } else {
-      userPath = absoluteRoute(path);
-      resolve(getFileFromDirectory(userPath, options));
-      //reject("No hay archivos de tipo markdown");
+      let userPath = absoluteRoute(path);
+      let listFile = getFileFromDirectory(userPath);
+      listFile.then(files => {
+        if (files.length > 0) {
+          resolve(getLinksWhenIsDirectory(files, options));
+        } else {
+          reject("No hay archivos de tipo markdown");
+        }
+      });
     }
   });
 };
@@ -195,7 +205,6 @@ program
 // Fin de las opciones validas para nuestro paquete
 
 program.parse(process.argv);
-console.log(program.args);
 
 function selectedOption() {
   let option = {};
@@ -214,8 +223,24 @@ const cliEjecution = () => {
     processLineByLine(userPath, selectedOption()).then(printInTerminal);
   } else {
     userPath = absoluteRoute(program.args[0]);
-    console.log("1" + userPath);
-    getFileFromDirectory(userPath, selectedOption());
+    let listFile = getFileFromDirectory(userPath);
+    listFile.then(files => {
+      if (files.length > 0) {
+        getLinksWhenIsDirectory(files, option).then(links => {
+          if (option.stats) {
+            links.forEach(stats => {
+              console.log(stats);
+            });
+          } else {
+            links.forEach(link => {
+              console.log(`${link.file}    ${link.href}    ${link.text}`);
+            });
+          }
+        });
+      } else {
+        reject("No hay archivos de tipo markdown");
+      }
+    });
   }
 
   if (program.validate) {
