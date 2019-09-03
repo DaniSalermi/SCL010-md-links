@@ -27,7 +27,6 @@ const ext = [
 function checkMdFilesOrDirectory(path) {
   return ext.indexOf(path.split(".").pop());
 }
-
 //Función para retornar un directorio absoluto cuando una persona pasa un directorio relativo
 function absoluteRoute(route) {
   if (path.isAbsolute(route)) {
@@ -38,7 +37,14 @@ function absoluteRoute(route) {
     return route;
   }
 }
-
+//Función para obtener todos los archivos .md desde un directorio dado
+function getFileFromDirectory(directory) {
+  return FileHound.create()
+    .paths(directory)
+    .ext(ext)
+    .depth(0)
+    .find();
+}
 //Función validate, cuando se ejecuta, devuelve el status para cada link encontrado.
 function validate(link) {
   return new Promise((resolve, reject) => {
@@ -49,7 +55,6 @@ function validate(link) {
     });
   });
 }
-
 // Función que cuenta los links que está rotos (fail)
 function brokenLinks(links) {
   let brokenLinksCounter = 0;
@@ -79,7 +84,6 @@ function getTextFromLine(line) {
   }
   return text;
 }
-
 //Función que obtiene el texto dentro de 2 parentesis que contienen el texto http (URL del link encontrado)
 function getUrlFromLine(line) {
   let url = line.split("(http")[1];
@@ -87,7 +91,6 @@ function getUrlFromLine(line) {
   url = url.split(")")[0];
   return url;
 }
-
 //Esta función lee línea a línea un archivo markdown y devuelve un arreglo de objetos
 async function processLineByLine(path, options) {
   const fileStream = fs.createReadStream(path);
@@ -132,15 +135,7 @@ async function processLineByLine(path, options) {
     return links;
   }
 }
-
-function getFileFromDirectory(directory) {
-  return FileHound.create()
-    .paths(directory)
-    .ext(ext)
-    .depth(0)
-    .find();
-}
-
+//Esta función se encarga de retornar los links cuando el path dado es un directorio
 function getLinksWhenIsDirectory(arrayOfFiles, options) {
   return new Promise((resolve, reject) => {
     let arrayOfPromises = [];
@@ -187,4 +182,5 @@ module.exports.absoluteRoute = absoluteRoute;
 module.exports.processLineByLine = processLineByLine;
 module.exports.getFileFromDirectory = getFileFromDirectory;
 module.exports.getLinksWhenIsDirectory = getLinksWhenIsDirectory;
+module.exports.validate = validate;
 // ! Fin módulo require
