@@ -1,11 +1,9 @@
-#!/usr/bin/env node
 // ! Dependencias necesarias del paquete
 const fs = require("fs");
 const readline = require("readline");
 const FileHound = require("filehound");
 const fetch = require("fetch");
 const fetchUrl = fetch.fetchUrl;
-const commander = require("commander");
 const path = require("path");
 const chalk = require("chalk");
 // ! Fin dependencias necesarias del paquete
@@ -122,7 +120,6 @@ async function processLineByLine(path, options) {
     }
     numberOfLine++;
   }
-  console.log(`Hay un total de: ${numberOfLinks} links`);
   if (options.stats) {
     let salida = "";
     salida += chalk.cyan(`Total: ${numberOfLinks} \n`);
@@ -144,10 +141,6 @@ function getFileFromDirectory(directory) {
     .find();
 }
 
-// ! Fin funciones compartidas
-
-// ! Módulo del require
-
 function getLinksWhenIsDirectory(arrayOfFiles, options) {
   return new Promise((resolve, reject) => {
     let arrayOfPromises = [];
@@ -167,7 +160,9 @@ function getLinksWhenIsDirectory(arrayOfFiles, options) {
     });
   });
 }
+// ! Fin funciones compartidas
 
+// ! Módulo del require
 module.exports = (path, options = { validate: false, stats: false }) => {
   return new Promise((resolve, reject) => {
     const isMd = checkMdFilesOrDirectory(path);
@@ -187,81 +182,9 @@ module.exports = (path, options = { validate: false, stats: false }) => {
     }
   });
 };
-
+module.exports.checkMdFilesOrDirectory = checkMdFilesOrDirectory;
+module.exports.absoluteRoute = absoluteRoute;
+module.exports.processLineByLine = processLineByLine;
+module.exports.getFileFromDirectory = getFileFromDirectory;
+module.exports.getLinksWhenIsDirectory = getLinksWhenIsDirectory;
 // ! Fin módulo require
-
-// ! Terminal (CLI)
-
-const program = new commander.Command();
-program.version("1.0.1").description("Stadistics about markdown files");
-
-// Definiendo opciones válidas que podrá ingresar el usuario
-program
-  .option("-v, --validate", "to validate the links inside of a markdown file")
-  .option(
-    "-s, --stats",
-    "to show some basic stats about the links (total of links and unique ones"
-  );
-// Fin de las opciones validas para nuestro paquete
-
-program.parse(process.argv);
-
-function selectedOption() {
-  let option = {};
-  option.validate = program.validate;
-  option.stats = program.stats;
-  console.log(option);
-  return option;
-}
-
-const cliEjecution = () => {
-  const isMd = checkMdFilesOrDirectory(program.args[0]);
-  option = selectedOption();
-  if (isMd >= 0) {
-    let userPath;
-    userPath = absoluteRoute(program.args[0]);
-    processLineByLine(userPath, selectedOption()).then(printInTerminal);
-  } else {
-    userPath = absoluteRoute(program.args[0]);
-    let listFile = getFileFromDirectory(userPath);
-    listFile.then(files => {
-      if (files.length > 0) {
-        getLinksWhenIsDirectory(files, option).then(links => {
-          if (option.stats) {
-            links.forEach(stats => {
-              console.log(stats);
-            });
-          } else {
-            links.forEach(link => {
-              console.log(`${link.file}    ${link.href}    ${link.text}`);
-            });
-          }
-        });
-      } else {
-        reject("No hay archivos de tipo markdown");
-      }
-    });
-  }
-
-  if (program.validate) {
-  }
-};
-// Se determina si se está haciendo una ejecución por CLI
-if (program.args.length > 0) {
-  cliEjecution();
-}
-
-function printInTerminal(response) {
-  if (program.stats) {
-    console.log(response);
-  } else {
-    response.forEach(link => {
-      console.log(
-        `${link.file} ${link.href} ${
-          program.validate ? link.ok + " " + link.status : ""
-        } ${link.text} `
-      );
-    });
-  }
-}
-// ! Fin funciones terminal (CLI)
