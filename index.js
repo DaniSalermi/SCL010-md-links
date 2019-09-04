@@ -1,8 +1,8 @@
 const mdLinks = require("./md-links");
 console.time("Con validate");
-mdLinks("./", {
-  validate: false,
-  stats: true
+mdLinks("./mdFiles", {
+  validate: true,
+  stats: false
 })
   .then(res => {
     console.log(res);

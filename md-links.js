@@ -183,4 +183,5 @@ module.exports.processLineByLine = processLineByLine;
 module.exports.getFileFromDirectory = getFileFromDirectory;
 module.exports.getLinksWhenIsDirectory = getLinksWhenIsDirectory;
 module.exports.validate = validate;
+module.exports.brokenLinks = brokenLinks;
 // ! Fin módulo require
