@@ -24,6 +24,7 @@ describe("mdLinks", () => {
       expect(res).toBe(200);
     });
   });
+  //Arreglo de ejemplo para testear las funciones: brokenLinks y uniqueLinks
   let arrayOfExample = [
     {
       href: "https://es.wikipedia.org/wiki/Markdown/fshgrsgk",
@@ -52,9 +53,42 @@ describe("mdLinks", () => {
       line: 18,
       status: 200,
       ok: "ok"
+    },
+    {
+      href:
+        "https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg",
+      text: "md-links",
+      file:
+        "/mnt/c/Users/saler/Documents/Programacion/SCL010-md-links/mdFiles/READMEALTERNO.md",
+      line: 18,
+      status: 200,
+      ok: "ok"
+    },
+    {
+      href:
+        "https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg",
+      text: "md-links",
+      file:
+        "/mnt/c/Users/saler/Documents/Programacion/SCL010-md-links/mdFiles/READMEALTERNO.md",
+      line: 18,
+      status: 200,
+      ok: "ok"
     }
   ];
   test(`Se espera que retorne 2 para arrayOfExample`, () => {
     expect(mdLinks.brokenLinks(arrayOfExample)).toBe(2);
+  });
+  test(`Se espera que retorne 3 para arrayOfExample`, () => {
+    expect(mdLinks.uniqueLinks(arrayOfExample)).toBe(3);
+  });
+  //Definiendo una línea para probar las funciones getTextFromLine
+  let lineOfExample =
+    "[motor de JavaScript V8 de Chrome](https://developers.google.com/v8/).";
+  test(`Se espera que retorne "motor de JavaScript V8 de Chrome" para lineOfExample`, () => {
+    expect(
+      mdLinks
+        .getTextFromLine(lineOfExample)
+        .toBe("motor de JavaScript V8 de Chrome")
+    );
   });
 });

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1567596383021" clover="3.2.0">
-  <project timestamp="1567596383021" name="All files">
-    <metrics statements="93" coveredstatements="31" conditionals="25" coveredconditionals="3" methods="21" coveredmethods="8" elements="139" coveredelements="42" complexity="0" loc="93" ncloc="93" packages="1" files="1" classes="1"/>
+<coverage generated="1567625089299" clover="3.2.0">
+  <project timestamp="1567625089299" name="All files">
+    <metrics statements="95" coveredstatements="43" conditionals="25" coveredconditionals="4" methods="21" coveredmethods="11" elements="141" coveredelements="58" complexity="0" loc="95" ncloc="95" packages="1" files="1" classes="1"/>
     <file name="md-links.js" path="/mnt/c/Users/saler/Documents/Programacion/SCL010-md-links/md-links.js">
-      <metrics statements="93" coveredstatements="31" conditionals="25" coveredconditionals="3" methods="21" coveredmethods="8"/>
+      <metrics statements="95" coveredstatements="43" conditionals="25" coveredconditionals="4" methods="21" coveredmethods="11"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
       <line num="4" count="1" type="stmt"/>
@@ -25,20 +25,20 @@
       <line num="54" count="1" type="stmt"/>
       <line num="60" count="1" type="stmt"/>
       <line num="61" count="1" type="stmt"/>
-      <line num="62" count="3" type="cond" truecount="2" falsecount="0"/>
+      <line num="62" count="5" type="cond" truecount="2" falsecount="0"/>
       <line num="63" count="2" type="stmt"/>
       <line num="66" count="1" type="stmt"/>
-      <line num="70" count="0" type="stmt"/>
-      <line num="71" count="0" type="stmt"/>
-      <line num="72" count="0" type="stmt"/>
-      <line num="74" count="0" type="stmt"/>
-      <line num="75" count="0" type="stmt"/>
-      <line num="79" count="0" type="stmt"/>
-      <line num="80" count="0" type="stmt"/>
-      <line num="81" count="0" type="stmt"/>
-      <line num="82" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="70" count="1" type="stmt"/>
+      <line num="71" count="1" type="stmt"/>
+      <line num="72" count="5" type="stmt"/>
+      <line num="74" count="1" type="stmt"/>
+      <line num="75" count="1" type="stmt"/>
+      <line num="79" count="1" type="stmt"/>
+      <line num="80" count="1" type="stmt"/>
+      <line num="81" count="1" type="stmt"/>
+      <line num="82" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="83" count="0" type="stmt"/>
-      <line num="85" count="0" type="stmt"/>
+      <line num="85" count="1" type="stmt"/>
       <line num="89" count="0" type="stmt"/>
       <line num="90" count="0" type="stmt"/>
       <line num="91" count="0" type="stmt"/>
@@ -97,6 +97,8 @@
       <line num="184" count="1" type="stmt"/>
       <line num="185" count="1" type="stmt"/>
       <line num="186" count="1" type="stmt"/>
+      <line num="187" count="1" type="stmt"/>
+      <line num="188" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>

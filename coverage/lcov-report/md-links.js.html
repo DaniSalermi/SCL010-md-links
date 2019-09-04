@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">32.63% </span>
+        <span class="strong">44.33% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>31/95</span>
+        <span class='fraction'>43/97</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">12% </span>
+        <span class="strong">16% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>3/25</span>
+        <span class='fraction'>4/25</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">38.1% </span>
+        <span class="strong">52.38% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>8/21</span>
+        <span class='fraction'>11/21</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">33.33% </span>
+        <span class="strong">45.26% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>31/93</span>
+        <span class='fraction'>43/95</span>
       </div>
     </div>
     <p class="quiet">
@@ -233,7 +233,9 @@
 <a name='L185'></a><a href='#L185'>185</a>
 <a name='L186'></a><a href='#L186'>186</a>
 <a name='L187'></a><a href='#L187'>187</a>
-<a name='L188'></a><a href='#L188'>188</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L188'></a><a href='#L188'>188</a>
+<a name='L189'></a><a href='#L189'>189</a>
+<a name='L190'></a><a href='#L190'>190</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -294,7 +296,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -302,22 +304,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -412,6 +414,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -488,23 +492,23 @@ function brokenLinks(links) {
   return brokenLinksCounter;
 }
 //Función que retorna la cantidad de links que son únicos
-function <span class="fstat-no" title="function not covered" >uniqueLinks(</span>links) {
-  let hrefs = <span class="cstat-no" title="statement not covered" >[];</span>
-<span class="cstat-no" title="statement not covered" >  links.forEach(<span class="fstat-no" title="function not covered" >li</span>nk =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    hrefs.push(link.href);</span>
+function uniqueLinks(links) {
+  let hrefs = [];
+  links.forEach(link =&gt; {
+    hrefs.push(link.href);
   });
-  let uniqueLinks = <span class="cstat-no" title="statement not covered" >[...new Set(hrefs)];</span>
-<span class="cstat-no" title="statement not covered" >  return uniqueLinks.length;</span>
+  let uniqueLinks = [...new Set(hrefs)];
+  return uniqueLinks.length;
 }
 //Función que obtiene el texto dentro de 2 corchetes (texto del link encontrado)
-function <span class="fstat-no" title="function not covered" >getTextFromLine(</span>line) {
-  let text = <span class="cstat-no" title="statement not covered" >line.split("[")[1];</span>
-<span class="cstat-no" title="statement not covered" >  text = text.split("]")[0];</span>
-  const maxLengthOfText = <span class="cstat-no" title="statement not covered" >50;</span>
-<span class="cstat-no" title="statement not covered" >  if (text.length &gt; maxLengthOfText) {</span>
+function getTextFromLine(line) {
+  let text = line.split("[")[1];
+  text = text.split("]")[0];
+  const maxLengthOfText = 50;
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (text.length &gt; maxLengthOfText) {
 <span class="cstat-no" title="statement not covered" >    text = text.substring(0, maxLengthOfText);</span>
   }
-<span class="cstat-no" title="statement not covered" >  return text;</span>
+  return text;
 }
 //Función que obtiene el texto dentro de 2 parentesis que contienen el texto http (URL del link encontrado)
 function <span class="fstat-no" title="function not covered" >getUrlFromLine(</span>line) {
@@ -606,6 +610,8 @@ module.exports.getFileFromDirectory = getFileFromDirectory;
 module.exports.getLinksWhenIsDirectory = getLinksWhenIsDirectory;
 module.exports.validate = validate;
 module.exports.brokenLinks = brokenLinks;
+module.exports.uniqueLinks = uniqueLinks;
+module.exports.getTextFromLine = getTextFromLine;
 // ! Fin módulo require
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -613,7 +619,7 @@ module.exports.brokenLinks = brokenLinks;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Sep 04 2019 07:26:22 GMT-0400 (Chile Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Sep 04 2019 15:24:49 GMT-0400 (Chile Standard Time)
 </div>
 </div>
 <script src="prettify.js"></script>

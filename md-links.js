@@ -184,4 +184,6 @@ module.exports.getFileFromDirectory = getFileFromDirectory;
 module.exports.getLinksWhenIsDirectory = getLinksWhenIsDirectory;
 module.exports.validate = validate;
 module.exports.brokenLinks = brokenLinks;
+module.exports.uniqueLinks = uniqueLinks;
+module.exports.getTextFromLine = getTextFromLine;
 // ! Fin módulo require
