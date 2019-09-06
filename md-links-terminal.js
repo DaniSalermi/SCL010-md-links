@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 // ! Terminal (CLI)
 const mdLinks = require("./md-links");
 const commander = require("commander");
@@ -17,11 +16,12 @@ program
 
 program.parse(process.argv);
 
+//Funcion que obtiene
 function selectedOption() {
   let option = {};
   option.validate = program.validate;
   option.stats = program.stats;
-  console.log(option);
+  // console.log(option);
   return option;
 }
 
@@ -76,3 +76,7 @@ function printInTerminal(response) {
   }
 }
 // ! Fin funciones terminal (CLI)
+
+module.exports.selectedOption = selectedOption;
+module.exports.cliEjecution = cliEjecution;
+module.exports.printInTerminal = printInTerminal;

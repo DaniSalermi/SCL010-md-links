@@ -5,7 +5,19 @@
 
 Encuentra todos los links dentro de un archivo Markdown. Funciona cuando se ingresa una ruta relativa/ absoluta o si se llama un archivo Markdown que se encuentre en la posiciòn relativa en la que està el usuario.
 
-## Instalación
+## Instalación 🔧
+
+```console
+$ npm install danisalermi/md-links
+```
+
+## Usage ⚙
+
+```js
+const md-links = require('@danisalermi/md-links');
+
+console.log(chalk.blue('Hello world!'));
+```
 
 ## Preámbulo
 
