@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // ! Terminal (CLI)
 const mdLinks = require("./md-links");
 const commander = require("commander");

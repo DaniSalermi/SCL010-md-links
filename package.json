@@ -11,7 +11,7 @@
     "md-links": "./md-links-terminal.js"
   },
   "scripts": {
-    "test": "jest --coverage READMEALTERNO.md -v",
+    "test": "jest --coverage",
     "eslint": "eslint --ext .js test/",
     "pretest": "npm run eslint"
   },
