@@ -14,16 +14,66 @@ $ npm install danisalermi/md-links
 ## Usage ⚙
 
 ```js
-const md-links = require('@danisalermi/md-links');
+const md-links = require("@danisalermi/md-links");
 
-danisalermi/md-links "path" <options>
+mdLinks("path", {
+  options (opcionales)
+})
+  .then(res => {
+    console.log(res);
+  })
+  .catch(err => {
+    console.log(err);
+  });
 ```
 
-## Opciones
+## Opciones 🔑
 
 Se puede utilizar el paquete con una serie de opciones.
+Las cuales son:
 
-## Preámbulo
+- Sin opciones: al ejecutar el paquete sin opciones se genera un arreglo con objetos que continen para cada link: href (link de la página), text (texto que acompaña al link) y file (archivo de donde se extrae el link).
+- Validate: al ejecutar el paquete con la opción validate: true (para ejecución con require) o -v, -validate (para ejecución por CLI), se genera el arreglo anterior, agregando además, para cada link encontrado el status de cada uno de ellos mediante una llamada http.
+- Stats: al ejecutar el paquete con la opción stats: true (para ejecución con require) o -s, -stats (para ejecución por CLI), se genera un objeto con el total de link y con la cantidad de links únicos encontrados dentro del archivo(s).
+- Stats y Validate: al ejecutar el paquete con las opcines stats: true, validate: true (para ejecución con require) o -s -v, -stats -validate (para ejecución por CLI), se genera un objeto con el total de link, con la cantidad de links únicos encontrados dentro del archivo(s) y la cantidad de los mismos que tienen una respuesta http no favorable.
+
+Ejemplos ✅:
+
+```js
+const mdLinks = require("@danisalermi/md-links");
+
+mdLinks("./some/example.md")
+  .then(links => {
+    // => [{ href, text, file }]
+  })
+  .catch(console.error);
+
+mdLinks("./some/example.md", { validate: true, stats: false })
+  .then(links => {
+    // => [{ href, text, file, status, ok }]
+  })
+  .catch(console.error);
+
+mdLinks("./some/example.md", { validate: false, stats: true})
+  .then(links => {
+    // => { Total, Unique }
+  })
+  .catch(console.error);
+
+mdLinks("./some/example.md", { validate: true stats: true})
+  .then(links => {
+    // => { Total, Unique, Broken }
+  })
+  .catch(console.error);
+
+mdLinks("./some/dir")
+  .then(links => {
+    // => [{ href, text, file }]
+  })
+  .catch(console.error);
+```
+
+## Preámbulo 💥
 
 [Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado
 ligero muy popular entre developers. Es usado en muchísimas plataformas que
