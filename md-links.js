@@ -125,10 +125,10 @@ async function processLineByLine(path, options) {
   }
   if (options.stats) {
     let salida = "";
-    salida += chalk.cyan(`Total: ${numberOfLinks} \n`);
-    salida += chalk.green(`Unique: ${uniqueLinks(links)} \n`);
+    salida += chalk.cyan(`Total: ${numberOfLinks}\n`);
+    salida += chalk.green(`Unique: ${uniqueLinks(links)}\n`);
     if (options.validate) {
-      salida += chalk.red(`Broken: ${brokenLinks(links)} \n`);
+      salida += chalk.red(`Broken: ${brokenLinks(links)}\n`);
     }
     return salida;
   } else {
@@ -186,4 +186,5 @@ module.exports.validate = validate;
 module.exports.brokenLinks = brokenLinks;
 module.exports.uniqueLinks = uniqueLinks;
 module.exports.getTextFromLine = getTextFromLine;
+module.exports.getUrlFromLine = getUrlFromLine;
 // ! Fin módulo require

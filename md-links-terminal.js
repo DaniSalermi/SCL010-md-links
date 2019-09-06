@@ -2,7 +2,6 @@
 // ! Terminal (CLI)
 const mdLinks = require("./md-links");
 const commander = require("commander");
-console.log("Te amo");
 
 const program = new commander.Command();
 program.version("1.0.1").description("Stadistics about markdown files");
