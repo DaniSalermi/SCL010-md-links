@@ -4,7 +4,7 @@ const mdLinks = require("./md-links");
 const commander = require("commander");
 
 const program = new commander.Command();
-program.version("1.0.1").description("Stadistics about markdown files");
+program.version("2.0.0").description("Stadistics about markdown files");
 
 // Definiendo opciones válidas que podrá ingresar el usuario
 program

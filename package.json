@@ -1,6 +1,6 @@
 {
   "name": "@danisalermi/md-links",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "This module allows you to extract links from a markdown file, and shows an Array of objects with the link, the test of the link, the status of this link and the line of the Markdown file where the link was found.",
   "main": "md-links.js",
   "directories": {
