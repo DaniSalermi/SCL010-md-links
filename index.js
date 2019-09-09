@@ -1,8 +1,8 @@
 const mdLinks = require("./md-links");
 console.time("Con validate");
-mdLinks("./mdFiles", {
+mdLinks("README.md", {
   validate: true,
-  stats: true
+  stats: false
 })
   .then(res => {
     console.log(res);

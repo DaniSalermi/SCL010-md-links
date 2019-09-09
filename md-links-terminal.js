@@ -2,6 +2,7 @@
 // ! Terminal (CLI)
 const mdLinks = require("./md-links");
 const commander = require("commander");
+const chalk = require("chalk");
 
 const program = new commander.Command();
 program.version("2.0.0").description("Stadistics about markdown files");
@@ -45,7 +46,11 @@ const cliEjecution = () => {
             });
           } else {
             links.forEach(link => {
-              console.log(`chalk${link.file}    ${link.href}    ${link.text}`);
+              console.log(
+                `${chalk.green(link.file)})    ${chalk.cyan(
+                  link.href
+                )}    ${chalk.magenta(link.text)}`
+              );
             });
           }
         });
@@ -69,9 +74,11 @@ function printInTerminal(response) {
   } else {
     response.forEach(link => {
       console.log(
-        `${link.file} ${link.href} ${
-          program.validate ? link.ok + " " + link.status : ""
-        } ${link.text} `
+        `${chalk.green(link.file)} ${chalk.cyan(link.href)} ${
+          program.validate
+            ? chalk.yellow(link.ok) + " " + chalk.blue(link.status)
+            : ""
+        } ${chalk.magenta(link.text)} `
       );
     });
   }
